@@ -3,6 +3,7 @@ package com.github.typicalnerd9.flixcache.flixcache.user;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table
@@ -13,6 +14,9 @@ public class User {
     private String username;
     private String email;
     private LocalDate dob;
+    private List<Long> caches;
+    private List<Long> reviews;
+    private List<Integer> watched;
 
     public User() {
     }
