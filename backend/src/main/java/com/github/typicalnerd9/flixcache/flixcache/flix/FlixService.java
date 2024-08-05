@@ -14,7 +14,7 @@ public class FlixService {
     public FlixService(RestClient.Builder restClientBuilder) {
         this.restClient = restClientBuilder
                 .baseUrl("https://api.themoviedb.org/3")
-                .defaultHeader("Authorization", "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJmNGJjMzMyOGM3MjA1MTBjMTg1N2ZlOGNhYTEzYzAwYyIsIm5iZiI6MTcyMjQ1MjI3MS4yMjU3NTIsInN1YiI6IjY2YTkzMDA4NzQ4Y2EyNGZiMzVjNDlmOSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.LeMd7YhLLJCRnuleXWREyVRObX6F7x-Aw1fRlkiq5vc")
+                .defaultHeader("Authorization", "Bearer " + System.getenv("TMDB"))
                 .build();
     }
 
