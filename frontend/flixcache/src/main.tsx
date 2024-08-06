@@ -7,6 +7,7 @@ import { store } from './state/store.ts'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './components/Home.tsx'
 import FlixSearch from './features/search/FlixSearch.tsx'
+import MediaSearchPage from './components/MediaSearchPage.tsx'
 
 
 
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/search",
-        element: <FlixSearch/>
+        element: <MediaSearchPage/>
       }
     ]
     

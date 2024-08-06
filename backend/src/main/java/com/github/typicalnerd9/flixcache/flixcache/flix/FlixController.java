@@ -31,4 +31,9 @@ public class FlixController {
     public String getSearch(@RequestParam(name= "type", defaultValue = "movies") String type, @RequestParam(name= "query") String query, @RequestParam(name= "page") Integer page) {
         return flixService.getSearch(type, query, page);
     }
+
+    @GetMapping("/details")
+    public String getDetails(@RequestParam(name= "type", defaultValue = "movie") String type, @RequestParam(name= "id") String id) {
+        return flixService.getDetails(type, id);
+    }
 }

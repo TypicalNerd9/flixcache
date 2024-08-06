@@ -1,19 +1,15 @@
-import TrendingMovies from "../features/trending/TrendingMovies"
 import DetailsModal from "../features/modal/DetailsModal"
-import DiscoverHeader from "./DiscoverHeader"
-import Search from "./Search"
+import FlixSearch from "../features/search/FlixSearch"
 import { useAppSelector } from "../reduxHooks"
 
-function Home() {
+function MediaSearchPage() {
     const open: boolean = useAppSelector((state) => state.detailsModal.open)
     return (
         <>
-            <Search/>
-            <DiscoverHeader/>
-            <TrendingMovies/>
+            <FlixSearch/>
             {open && <DetailsModal/>}
         </>
     )
 }
 
-export default Home
+export default MediaSearchPage

@@ -21,11 +21,11 @@ public class FlixService {
     public String getTrending(String type, String timeframe) {
         final String safeTimeframe = (!timeframe.equals("day") && !timeframe.equals("week")) ? timeframe : "day";
         return switch (type) {
-            case "movies" -> this.restClient.get().uri("/trending/movie/"+ safeTimeframe)
+            case "movie" -> this.restClient.get().uri("/trending/movie/"+ safeTimeframe)
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
                     .body(String.class);
-            case "shows" -> this.restClient.get().uri("/trending/tv/"+ safeTimeframe)
+            case "tv" -> this.restClient.get().uri("/trending/tv/"+ safeTimeframe)
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
                     .body(String.class);
@@ -43,11 +43,25 @@ public class FlixService {
     public String getSearch(String type, String query, Integer page) {
         int queryPage = (page != null && page >= 1) ? page : 1;
         return switch (type) {
-            case "movies" -> this.restClient.get().uri("/search/movie" + "?query=" + query + "&page=" + queryPage)
+            case "movie" -> this.restClient.get().uri("/search/movie" + "?query=" + query + "&page=" + queryPage)
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
                     .body(String.class);
-            case "shows" -> this.restClient.get().uri("/search/tv" + "?query=" + query + "&page=" + queryPage)
+            case "tv" -> this.restClient.get().uri("/search/tv" + "?query=" + query + "&page=" + queryPage)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .retrieve()
+                    .body(String.class);
+            default -> "";
+        };
+    }
+
+    public String getDetails(String type, String id) {
+        return switch (type) {
+            case "movie" -> this.restClient.get().uri("/movie/" + id)
+                    .accept(MediaType.APPLICATION_JSON)
+                    .retrieve()
+                    .body(String.class);
+            case "tv" -> this.restClient.get().uri("/tv/" + id )
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
                     .body(String.class);

@@ -16,7 +16,10 @@ export const flixcacheApi = createApi({
         getSearch: builder.query<any, { type: string, query: string, page: number}>({
             query: ({type, query, page}) => `/flix/search?type=${type}&query=${query}&page=${page}`
         }),
+        getDetails: builder.query<any, { type: string, mediaId: string}>({
+            query: ({type, mediaId}) => `/flix/details?type=${type}&id=${mediaId}`
+        }),
     }),
 })
 
-export const { useGetTrendingQuery, useGetConfigQuery, useGetSearchQuery } = flixcacheApi;
+export const { useGetTrendingQuery, useGetConfigQuery, useGetSearchQuery, useGetDetailsQuery } = flixcacheApi;

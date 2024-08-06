@@ -1,6 +1,7 @@
 import { useAppDispatch, useAppSelector } from "../reduxHooks"
 import { setQuery } from "../features/search/searchSlice"
 import { useNavigate } from "react-router-dom"
+import React from "react"
 
 function Search() {
     const { query } = useAppSelector((state) => state.search)
@@ -19,7 +20,8 @@ function Search() {
                     className="ps-6 basis-4/5 rounded-l-full"
                     type="text"
                     placeholder="Search for a movie or tv show..."
-                    onChange={(e) => dispatch(setQuery(e.target.value))}/>
+                    onChange={(e) => dispatch(setQuery(e.target.value))}
+                    onKeyDown={(e) => e.key === 'Enter' ? searchWithQuery() : null}/>
                 <button
                     className="rounded-r-full pe-6"
                     onClick={searchWithQuery}>
