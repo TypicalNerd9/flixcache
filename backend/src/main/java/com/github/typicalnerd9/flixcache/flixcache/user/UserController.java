@@ -1,5 +1,6 @@
 package com.github.typicalnerd9.flixcache.flixcache.user;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,6 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping(path = "/user")
 public class UserController {
 
@@ -24,9 +26,14 @@ public class UserController {
 
 
 
-    @PostMapping
-    public void registerUser(@RequestBody User newUser) {
-        userService.addNewUser(newUser);
+    @PostMapping("/register")
+    public boolean registerUser(@RequestBody User newUser) {
+        return userService.addNewUser(newUser);
+    }
+
+    @PostMapping("/login")
+    public String loginUser(@RequestBody User user, HttpServletResponse res) {
+        return userService.verify(user, res);
     }
 
     @DeleteMapping(path = "{userId}")

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 
 function Header() {
 
@@ -9,9 +10,10 @@ function Header() {
                     <div>
                         <a></a>
                     </div>
-                    <a>Discover</a>
-                    <a>Caches</a>
-                    <a>Feed</a>
+                    <Link to="/discover">Discover</Link>
+                    <Link to="/cache">Cache</Link>
+                    <Link to="/log-in">Log In</Link>
+                    <Link to="/sign-up">Sign Up</Link>
                 </div>
             </nav>
         </header>

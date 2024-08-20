@@ -8,6 +8,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './components/Home.tsx'
 import FlixSearch from './features/search/FlixSearch.tsx'
 import MediaSearchPage from './components/MediaSearchPage.tsx'
+import SignUp from './components/SignUp.tsx'
+import LogIn from './components/LogIn.tsx'
 
 
 
@@ -23,7 +25,15 @@ const router = createBrowserRouter([
       {
         path: "/search",
         element: <MediaSearchPage/>
-      }
+      },
+      {
+        path: "/sign-up",
+        element: <SignUp/>
+      },
+      {
+        path: "/log-in",
+        element: <LogIn/>
+      },
     ]
     
   }

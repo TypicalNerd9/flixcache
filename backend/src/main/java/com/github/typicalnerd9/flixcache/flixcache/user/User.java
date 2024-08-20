@@ -13,7 +13,7 @@ public class User {
     private Long id;
     private String username;
     private String email;
-    private LocalDate dob;
+    private String password;
     private List<Long> caches;
     private List<Long> reviews;
     private List<Integer> watched;
@@ -21,17 +21,22 @@ public class User {
     public User() {
     }
 
-    public User(Long id, String username, String email, LocalDate dob) {
+    public User(Long id, String username, String email, String password) {
         this.id = id;
         this.username = username;
         this.email = email;
-        this.dob = dob;
+        this.password = password;
     }
 
-    public User(String username, String email, LocalDate dob) {
+    public User(String username, String email, String password) {
         this.username = username;
         this.email = email;
-        this.dob = dob;
+        this.password = password;
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public Long getId() {
@@ -58,12 +63,12 @@ public class User {
         this.email = email;
     }
 
-    public LocalDate getDob() {
-        return dob;
+    public String getPassword() {
+        return password;
     }
 
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     @Override
@@ -72,7 +77,6 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
-                ", dob=" + dob +
                 '}';
     }
 }
