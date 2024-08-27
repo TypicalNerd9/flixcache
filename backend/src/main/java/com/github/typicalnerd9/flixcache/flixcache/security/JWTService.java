@@ -6,6 +6,7 @@ import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.jwt.*;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import javax.crypto.SecretKey;
 import java.security.NoSuchAlgorithmException;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Base64;
 import java.util.stream.Collectors;
 
 @Service
@@ -24,6 +26,7 @@ public class JWTService {
         try {
             KeyGenerator keyGen = KeyGenerator.getInstance("HmacSHA256");
             secret = keyGen.generateKey();
+            System.out.println("SECRET: " + Base64.getEncoder().encodeToString(secret.getEncoded()));
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
@@ -54,4 +57,5 @@ public class JWTService {
 
         return jwtEncoder().encode(JwtEncoderParameters.from(jwsHeader, claims)).getTokenValue();
     }
+
 }

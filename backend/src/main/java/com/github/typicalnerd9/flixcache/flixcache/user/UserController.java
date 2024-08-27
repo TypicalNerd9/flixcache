@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 @RequestMapping(path = "/user")
 public class UserController {
 
@@ -35,6 +35,12 @@ public class UserController {
     public String loginUser(@RequestBody User user, HttpServletResponse res) {
         return userService.verify(user, res);
     }
+
+    @PostMapping("/logout")
+    public void logoutUser(HttpServletResponse res) {
+        userService.logout(res);
+    }
+
 
     @DeleteMapping(path = "{userId}")
     public void deleteUser(@PathVariable("userId") Long userId) {

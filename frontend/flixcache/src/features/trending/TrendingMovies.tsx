@@ -16,7 +16,7 @@ function TrendingMovies() {
     console.log(data)
     console.log(configData)
 
-    const posterSize: string = configIsLoading ? "" : configData.images.poster_sizes[1].slice(1)
+    const posterSize: string = (configIsLoading && configData == null) ? "" : configData.images.poster_sizes[1].slice(1)
 
     const postersDisplayed: number = 6;
     return(

@@ -8,16 +8,28 @@ export const flixcacheApi = createApi({
     tagTypes: ['Users'],
     endpoints: (builder) => ({
         getTrending: builder.query<any, { type: string, timeframe: string}>({
-            query: ({type, timeframe}) => `/flix/trending?type=${type}&timeframe=${timeframe}`
+            query: ({type, timeframe}) => ({
+                url: `/flix/trending?type=${type}&timeframe=${timeframe}`,
+                credentials: "include"
+            })
         }),
         getConfig: builder.query<any, undefined>({
-            query: () => '/flix/config'
+            query: () => ({
+                url: '/flix/config',
+                credentials: "include"
+            })
         }),
         getSearch: builder.query<any, { type: string, query: string, page: number}>({
-            query: ({type, query, page}) => `/flix/search?type=${type}&query=${query}&page=${page}`
+            query: ({type, query, page}) => ({
+                url: `/flix/search?type=${type}&query=${query}&page=${page}`,
+                credentials: "include"
+            })
         }),
         getDetails: builder.query<any, { type: string, mediaId: string}>({
-            query: ({type, mediaId}) => `/flix/details?type=${type}&id=${mediaId}`
+            query: ({type, mediaId}) => ({
+                url: `/flix/details?type=${type}&id=${mediaId}`,
+                credentials: "include"
+            })
         }),
         createUser: builder.mutation<boolean, { username: string, email: string, password: string}>({
             query: ({username, email, password}) => ({
@@ -25,7 +37,6 @@ export const flixcacheApi = createApi({
                 method: 'POST',
                 body: {username, email, password}
             }),
-            invalidatesTags: ['Users']
         }),
         loginUser: builder.mutation<string, { username: string, password: string}>({
             query: ({username, password}) => ({
@@ -33,10 +44,17 @@ export const flixcacheApi = createApi({
                 method: 'POST',
                 body: {username, password},
                 responseHandler: (response) => response.text(),
+                credentials: "include"
             }),
-            invalidatesTags: ['Users']
+        }),
+        logoutUser: builder.mutation<string, undefined>({
+            query: () => ({
+                url: `/user/logout`,
+                method: 'POST',
+                credentials: "include"
+            }),
         }),
     }),
 })
 
-export const { useGetTrendingQuery, useGetConfigQuery, useGetSearchQuery, useGetDetailsQuery, useCreateUserMutation, useLoginUserMutation} = flixcacheApi;
+export const { useGetTrendingQuery, useGetConfigQuery, useGetSearchQuery, useGetDetailsQuery, useCreateUserMutation, useLoginUserMutation, useLogoutUserMutation} = flixcacheApi;

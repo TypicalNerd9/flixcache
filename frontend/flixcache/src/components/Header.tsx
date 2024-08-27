@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom"
+import { useLogoutUserMutation } from "../services/flixcache"
 
 function Header() {
+
+    const [logoutUser] = useLogoutUserMutation()
 
     return(
         <>
@@ -10,10 +13,11 @@ function Header() {
                     <div>
                         <a></a>
                     </div>
-                    <Link to="/discover">Discover</Link>
+                    <Link to="/">Discover</Link>
                     <Link to="/cache">Cache</Link>
                     <Link to="/log-in">Log In</Link>
                     <Link to="/sign-up">Sign Up</Link>
+                    <Link to="/" onClick={() => logoutUser(undefined)}>Log Out</Link>
                 </div>
             </nav>
         </header>

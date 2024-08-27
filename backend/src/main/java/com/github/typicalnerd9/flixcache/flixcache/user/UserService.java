@@ -6,9 +6,11 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseCookie;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -81,13 +83,23 @@ public class UserService {
 
         if (authentication.isAuthenticated()) {
             String token = jwtService.generateToken(authentication);
-            Cookie cookie = new Cookie("token", token);
-            //cookie.setSecure(true);
-            cookie.setHttpOnly(true);
-            cookie.setDomain("/");
-            res.addCookie(cookie);
+            ResponseCookie resCookie = ResponseCookie.from("JWT_TOKEN", token)
+                    .httpOnly(true)
+                    .path("/")
+                    .build();
+            res.addHeader("Set-Cookie", resCookie.toString());
             return token;
         }
         return "Fail";
+    }
+
+
+    public void logout(HttpServletResponse res) {
+        ResponseCookie resCookie = ResponseCookie.from("JWT_TOKEN", null)
+                .maxAge(0)
+                .httpOnly(true)
+                .path("/")
+                .build();
+        res.addHeader("Set-Cookie", resCookie.toString());
     }
 }
