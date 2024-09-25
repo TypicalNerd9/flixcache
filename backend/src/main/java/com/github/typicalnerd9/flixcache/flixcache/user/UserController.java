@@ -1,9 +1,12 @@
 package com.github.typicalnerd9.flixcache.flixcache.user;
 
+import com.github.typicalnerd9.flixcache.flixcache.security.UserPrincipal;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,6 +28,12 @@ public class UserController {
     }
 
 
+    @GetMapping("/verify")
+    public boolean isLoggedIn(Principal user) {
+        if (user == null) return false;
+
+        return true;
+    }
 
     @PostMapping("/register")
     public boolean registerUser(@RequestBody User newUser) {
@@ -40,7 +49,6 @@ public class UserController {
     public void logoutUser(HttpServletResponse res) {
         userService.logout(res);
     }
-
 
     @DeleteMapping(path = "{userId}")
     public void deleteUser(@PathVariable("userId") Long userId) {

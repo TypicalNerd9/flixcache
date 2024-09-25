@@ -14,4 +14,11 @@ public class Cache {
     private String name;
     private List<Integer> flix;
 
+    public Cache() {
+    }
+
+    public Cache(long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 }

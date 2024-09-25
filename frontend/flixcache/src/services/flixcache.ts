@@ -25,9 +25,15 @@ export const flixcacheApi = createApi({
                 credentials: "include"
             })
         }),
-        getDetails: builder.query<any, { type: string, mediaId: string}>({
-            query: ({type, mediaId}) => ({
-                url: `/flix/details?type=${type}&id=${mediaId}`,
+        getDetails: builder.query<any, { type: string, mediaId: string, withImages: boolean, withVideos: boolean, withWatchProviders: boolean}>({
+            query: ({type, mediaId, withImages, withVideos, withWatchProviders}) => ({
+                url: `/flix/details?type=${type}&id=${mediaId}&withImages=${withImages}&withVideos=${withVideos}&withWatchProviders=${withWatchProviders}`,
+                credentials: "include"
+            })
+        }),
+        isLoggedIn: builder.query<any, undefined>({
+            query: () => ({
+                url: '/user/verify',
                 credentials: "include"
             })
         }),
@@ -57,4 +63,4 @@ export const flixcacheApi = createApi({
     }),
 })
 
-export const { useGetTrendingQuery, useGetConfigQuery, useGetSearchQuery, useGetDetailsQuery, useCreateUserMutation, useLoginUserMutation, useLogoutUserMutation} = flixcacheApi;
+export const { useGetTrendingQuery, useGetConfigQuery, useGetSearchQuery, useGetDetailsQuery, useIsLoggedInQuery, useCreateUserMutation, useLoginUserMutation, useLogoutUserMutation} = flixcacheApi;

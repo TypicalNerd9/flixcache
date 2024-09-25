@@ -1,14 +1,14 @@
 import './App.css'
 import Header from './components/Header'
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 
 
 function App() {
-
+  let location = useLocation();
   
   return (
     <>
-      <Header/>
+      {location.pathname !== '/' ? <Header/> : null}
       <Outlet/>
     </>
   )

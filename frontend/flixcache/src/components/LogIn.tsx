@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom"
 import { useLoginUserMutation } from "../services/flixcache"
 
 function LogIn() {
@@ -25,17 +26,18 @@ function LogIn() {
     }
     return (
         <>
-            <div className="flex justify-center items-center">
-                <form className="p-8 flex flex-col gap-4 text-start" onSubmit={handleSubmit}>
+            <div className="flex justify-center items-center mt-10">
+                <form className="p-8 flex flex-col gap-4 text-start text-secondary w-80" onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="username">Username/Email</label><br/>
-                        <input type="text" id="username"/>
+                        <label htmlFor="username" className="font-semibold">Username/Email</label><br/>
+                        <input type="text" id="username" className="w-full h-8 align-middle pb-0.5 px-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"/>
                     </div>
                     <div>
-                        <label htmlFor="password">Password</label><br/>
-                        <input type="password" id="password"/>
+                        <label htmlFor="password" className="font-semibold">Password</label><br/>
+                        <input type="password" id="password" className="w-full h-8 align-middle pb-0.5 px-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"/>
                     </div>
-                    <button type="submit" className="w-[60%] mx-auto">Log In</button>
+                    <button type="submit" className="bg-primary hover:bg-pribright text-bg font-medium rounded-lg text-xl pb-1 mt-5">Log In</button>
+                    <p>Don't have an account yet? <Link to="/sign-up" className="font-medium underline text-secbright">Sign Up</Link></p>
                 </form>
             </div>
         </>

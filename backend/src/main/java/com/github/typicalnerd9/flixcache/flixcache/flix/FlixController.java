@@ -33,7 +33,12 @@ public class FlixController {
     }
 
     @GetMapping("/details")
-    public String getDetails(@RequestParam(name= "type", defaultValue = "movie") String type, @RequestParam(name= "id") String id) {
-        return flixService.getDetails(type, id);
+    public String getDetails(@RequestParam(name= "type", defaultValue = "movie") String type, @RequestParam(name= "id") String id, @RequestParam(name= "withImages") boolean withImages, @RequestParam(name= "withVideos") boolean withVideos, @RequestParam(name= "withWatchProviders") boolean withWatchProviders) {
+        return flixService.getDetails(type, id, withImages, withVideos, withWatchProviders);
+    }
+
+    @GetMapping("/videos")
+    public String getVideos(@RequestParam(name= "type", defaultValue = "movie") String type, @RequestParam(name= "id") String id) {
+        return flixService.getVideos(type, id);
     }
 }

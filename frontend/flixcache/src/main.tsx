@@ -10,6 +10,8 @@ import FlixSearch from './features/search/FlixSearch.tsx'
 import MediaSearchPage from './components/MediaSearchPage.tsx'
 import SignUp from './components/SignUp.tsx'
 import LogIn from './components/LogIn.tsx'
+import Discover from './components/Discover.tsx'
+import Cache from './components/Cache.tsx'
 
 
 
@@ -34,6 +36,14 @@ const router = createBrowserRouter([
         path: "/log-in",
         element: <LogIn/>
       },
+      {
+        path: "/discover",
+        element: <Discover/>
+      },
+      {
+        path: "/cache",
+        element: <Cache/>
+      },
     ]
     
   }
@@ -42,7 +52,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
-      <RouterProvider router={router}/>
+        <RouterProvider router={router}/>
     </Provider>
   </React.StrictMode>,
 )

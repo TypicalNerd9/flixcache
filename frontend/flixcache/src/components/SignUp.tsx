@@ -35,26 +35,26 @@ function SignUp() {
     }
     return (
         <>
-            <div className="flex justify-center items-center">
-                <form className="p-8 flex flex-col gap-4 text-start"
+            <div className="flex justify-center items-center mt-10">
+                <form className="p-8 flex flex-col gap-4 text-start text-secondary w-80"
                     onSubmit={handleSubmit}>
                     <div>
-                        <label htmlFor="username">Username</label><br/>
-                        <input type="text" id="username"/>
+                        <label htmlFor="username" className="font-semibold">Username</label><br/>
+                        <input type="text" id="username" className="w-full h-8 align-middle pb-0.5 px-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"/>
                     </div>
                     <div>
-                        <label htmlFor="email">Email</label><br/>
-                        <input type="text" id="email"/>
+                        <label htmlFor="email" className="font-semibold">Email</label><br/>
+                        <input type="text" id="email" className="w-full h-8 align-middle pb-0.5 px-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"/>
                     </div>
                     <div>
-                        <label htmlFor="password">Password</label><br/>
-                        <input type="password" id="password"/>
+                        <label htmlFor="password" className="font-semibold">Password</label><br/>
+                        <input type="password" id="password" className="w-full h-8 align-middle pb-0.5 px-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"/>
                     </div>
                     <div>
-                        <label htmlFor="password2">Re-enter Password</label><br/>
-                        <input type="password" id="password2"/>
+                        <label htmlFor="password2" className="font-semibold">Re-enter Password</label><br/>
+                        <input type="password" id="password2" className="w-full h-8 align-middle pb-0.5 px-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"/>
                     </div>
-                    <button type="submit" className="w-[60%] mx-auto">Sign Up</button>
+                    <button type="submit" className="bg-primary hover:bg-pribright text-bg font-medium rounded-lg text-xl pb-1 mt-5">Sign Up</button>
                 </form>
             </div>
         </>

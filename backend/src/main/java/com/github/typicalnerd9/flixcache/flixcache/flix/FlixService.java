@@ -55,13 +55,41 @@ public class FlixService {
         };
     }
 
-    public String getDetails(String type, String id) {
+    public String getDetails(String type, String id, boolean withImages, boolean withVideos, boolean withWatchProviders) {
+        String imageQuery = "images&include_image_language=en,null";
+        String videoQuery = "videos";
+        String watchProvidersQuery = "watch/providers";
+        String queryAppends = "?append_to_response=";
+        if (withImages && withVideos && withWatchProviders) queryAppends += videoQuery + "," + watchProvidersQuery + "," + imageQuery;
+        else if (withImages && withVideos) queryAppends += videoQuery + "," + imageQuery;
+        else if (withImages && withWatchProviders) queryAppends += watchProvidersQuery + "," + imageQuery;
+        else if (withVideos && withWatchProviders) queryAppends += videoQuery + "," + watchProvidersQuery;
+        else if (withImages) queryAppends += imageQuery;
+        else if (withVideos) queryAppends += videoQuery;
+        else if (withWatchProviders) queryAppends += watchProvidersQuery;
+        queryAppends += "&language=en-US";
+        System.out.println(withWatchProviders);
+        System.out.println(queryAppends);
         return switch (type) {
-            case "movie" -> this.restClient.get().uri("/movie/" + id)
+            case "movie" -> this.restClient.get().uri("/movie/" + id + (withImages || withVideos || withWatchProviders ? queryAppends : ""))
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
                     .body(String.class);
-            case "tv" -> this.restClient.get().uri("/tv/" + id )
+            case "tv" -> this.restClient.get().uri("/tv/" + id + (withImages || withVideos || withWatchProviders ? queryAppends : ""))
+                    .accept(MediaType.APPLICATION_JSON)
+                    .retrieve()
+                    .body(String.class);
+            default -> "";
+        };
+    }
+
+    public String getVideos(String type, String id) {
+        return switch (type) {
+            case "movie" -> this.restClient.get().uri("/movie/" + id + "/videos")
+                    .accept(MediaType.APPLICATION_JSON)
+                    .retrieve()
+                    .body(String.class);
+            case "tv" -> this.restClient.get().uri("/tv/" + id + "/videos")
                     .accept(MediaType.APPLICATION_JSON)
                     .retrieve()
                     .body(String.class);
